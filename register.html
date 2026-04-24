@@ -121,17 +121,27 @@
       error.textContent = '';
       
       try {
-        const res = await fetch(API_URL + '/auth/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password, name, phone, role })
-        });
-        const data = await res.json();
+        const users = JSON.parse(localStorage.getItem('fastbox_users') || '[]');
         
-        if (!res.ok) throw new Error(data.error || 'Ошибка регистрации');
+        if (users.find(u => u.email === email)) {
+          throw new Error('Email уже зарегистрирован');
+        }
         
-        localStorage.setItem('fastbox_token', data.token);
-        localStorage.setItem('fastbox_user', JSON.stringify(data.user));
+        const user = {
+          id: Date.now().toString(),
+          email,
+          password,
+          name,
+          phone,
+          role,
+          createdAt: new Date().toISOString()
+        };
+        
+        users.push(user);
+        localStorage.setItem('fastbox_users', JSON.stringify(users));
+        
+        localStorage.setItem('fastbox_token', 'demo-token-' + user.id);
+        localStorage.setItem('fastbox_user', JSON.stringify(user));
         
         if (role === 'courier') {
           window.location.href = 'courier.html';
