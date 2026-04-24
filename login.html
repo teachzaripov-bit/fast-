@@ -67,21 +67,18 @@
       error.textContent = '';
       
       try {
-        const users = JSON.parse(localStorage.getItem('fastbox_users') || '[]');
-        const user = users.find(u => u.email === email && u.password === password);
+        const res = await fetch(API_URL + '/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
         
-        if (!user) {
-          throw new Error('Неверный email или пароль');
-        }
+        if (!res.ok) throw new Error(data.error || 'Ошибка входа');
         
-        localStorage.setItem('fastbox_token', 'demo-token-' + user.id);
-        localStorage.setItem('fastbox_user', JSON.stringify(user));
-        
-        if (user.role === 'courier') {
-          window.location.href = 'courier.html';
-        } else {
-          window.location.href = 'dashboard.html';
-        }
+        localStorage.setItem('fastbox_token', data.token);
+        localStorage.setItem('fastbox_user', JSON.stringify(data.user));
+        window.location.href = 'dashboard.html';
       } catch (err) {
         error.textContent = err.message;
         submitBtn.textContent = 'Войти';

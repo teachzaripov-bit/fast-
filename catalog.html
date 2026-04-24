@@ -128,33 +128,6 @@
     let products = [];
     let currentCategory = '';
     
-    const localProducts = [
-      { id: 1, name: 'Молоко пастеризованное 3.2%', price: 89, basePrice: 75, weight: '1л', category: 'products', imageUrl: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?w=300&h=300&fit=crop' },
-      { id: 2, name: 'Хлеб ржаной', price: 59, basePrice: 45, weight: '400г', category: 'products', imageUrl: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300&h=300&fit=crop' },
-      { id: 3, name: 'Яйца куриные С1', price: 119, basePrice: 99, weight: '10 шт', category: 'products', imageUrl: 'https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=300&h=300&fit=crop' },
-      { id: 4, name: 'Сметана 15%', price: 95, basePrice: 80, weight: '300г', category: 'products', imageUrl: 'https://images.unsplash.com/photo-1626957341926-98752fc2ba90?w=300&h=300&fit=crop' },
-      { id: 5, name: 'Сыр Российский', price: 189, basePrice: 160, weight: '200г', category: 'products', imageUrl: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=300&h=300&fit=crop' },
-      { id: 6, name: 'Курица филе', price: 349, basePrice: 290, weight: '500г', category: 'products', imageUrl: 'https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=300&h=300&fit=crop' },
-      { id: 7, name: 'Творог 5%', price: 129, basePrice: 110, weight: '250г', category: 'products', imageUrl: 'https://images.unsplash.com/photo-1559598467-f8b76c8155d0?w=300&h=300&fit=crop' },
-      { id: 8, name: 'Масло сливочное 82%', price: 159, basePrice: 135, weight: '180г', category: 'products', imageUrl: 'https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=300&h=300&fit=crop' },
-      { id: 9, name: 'Пельмени классические', price: 289, basePrice: 250, weight: '500г', category: 'frozen', imageUrl: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=300&h=300&fit=crop' },
-      { id: 10, name: 'Вареники с вишней', price: 249, basePrice: 210, weight: '400г', category: 'frozen', imageUrl: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=300&h=300&fit=crop' },
-      { id: 11, name: 'Блины с мясом', price: 199, basePrice: 170, weight: '300г', category: 'frozen', imageUrl: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=300&h=300&fit=crop' },
-      { id: 12, name: 'Пицца Маргарита', price: 349, basePrice: 290, weight: '400г', category: 'frozen', imageUrl: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=300&h=300&fit=crop' },
-      { id: 13, name: 'Борщ классический', price: 189, basePrice: 160, weight: '500мл', category: 'ready', imageUrl: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=300&h=300&fit=crop' },
-      { id: 14, name: 'Плов с курицей', price: 279, basePrice: 240, weight: '350г', category: 'ready', imageUrl: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=300&h=300&fit=crop' },
-      { id: 15, name: 'Солянка мясная', price: 219, basePrice: 185, weight: '500мл', category: 'ready', imageUrl: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=300&h=300&fit=crop' },
-      { id: 16, name: 'Гречка с овощами', price: 169, basePrice: 145, weight: '300г', category: 'ready', imageUrl: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300&h=300&fit=crop' },
-      { id: 17, name: 'Cola 0.5л', price: 79, basePrice: 65, weight: '0.5л', category: 'drinks', imageUrl: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=300&h=300&fit=crop' },
-      { id: 18, name: 'Сок апельсиновый', price: 149, basePrice: 120, weight: '1л', category: 'drinks', imageUrl: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=300&h=300&fit=crop' },
-      { id: 19, name: 'Вода питьевая', price: 49, basePrice: 35, weight: '1.5л', category: 'drinks', imageUrl: 'https://images.unsplash.com/photo-1559839914-17aae19cec71?w=300&h=300&fit=crop' },
-      { id: 20, name: 'Энергетик', price: 99, basePrice: 80, weight: '0.45л', category: 'drinks', imageUrl: 'https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=300&h=300&fit=crop' },
-      { id: 21, name: 'Рис длиннозерный', price: 149, basePrice: 120, weight: '1кг', category: 'grocery', imageUrl: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300&h=300&fit=crop' },
-      { id: 22, name: 'Макароны спагетти', price: 89, basePrice: 70, weight: '500г', category: 'grocery', imageUrl: 'https://images.unsplash.com/photo-1551462147-37885db2595c?w=300&h=300&fit=crop' },
-      { id: 23, name: 'Гречка', price: 99, basePrice: 80, weight: '800г', category: 'grocery', imageUrl: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=300&h=300&fit=crop' },
-      { id: 24, name: 'Овсянка', price: 79, basePrice: 60, weight: '500г', category: 'grocery', imageUrl: 'https://images.unsplash.com/photo-1517673400267-0251440c2bbe?w=300&h=300&fit=crop' }
-    ];
-    
     function updateCartBadge() {
       const count = cart.reduce((sum, item) => sum + item.quantity, 0);
       document.getElementById('cartCount').textContent = count;
@@ -170,9 +143,14 @@
       }
     }
     
-    function loadProducts() {
-      products = localProducts;
-      renderProducts();
+    async function loadProducts() {
+      try {
+        const res = await fetch(API_URL + '/products');
+        products = await res.json();
+        renderProducts();
+      } catch (err) {
+        console.error(err);
+      }
     }
     
     function renderProducts() {
